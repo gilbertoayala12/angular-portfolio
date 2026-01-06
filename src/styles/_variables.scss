@@ -1,0 +1,70 @@
+// Custom Color Variables (Subtle Green Tech - Option 3)
+
+// Light Mode Colors
+:root {
+  // Backgrounds
+  --color-background: #FFFFFF;
+  --color-surface: #F8F9FA;
+  
+  // Text Colors
+  --color-text-primary: #1F2937;
+  --color-text-secondary: #6B7280;
+  
+  // Accent Colors
+  --color-accent: #059669;
+  --color-accent-hover: #047857;
+  --color-accent-rgb: 5, 150, 105; // For rgba usage
+  
+  // Borders & Dividers
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-divider: rgba(0, 0, 0, 0.08);
+  
+  // Shadows
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
+  
+  // Transitions
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Spacing (8px grid)
+  --spacing-xs: 0.5rem;  // 8px
+  --spacing-sm: 1rem;    // 16px
+  --spacing-md: 1.5rem;  // 24px
+  --spacing-lg: 2rem;    // 32px
+  --spacing-xl: 3rem;    // 48px
+  --spacing-2xl: 4rem;   // 64px
+  
+  // Border Radius
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+// Dark Mode Colors
+.dark-theme {
+  // Backgrounds
+  --color-background: #0F172A;
+  --color-surface: #1E293B;
+  
+  // Text Colors
+  --color-text-primary: #F1F5F9;
+  --color-text-secondary: #94A3B8;
+  
+  // Accent Colors
+  --color-accent: #10B981;
+  --color-accent-hover: #34D399;
+  --color-accent-rgb: 16, 185, 129;
+  
+  // Borders & Dividers
+  --color-border: rgba(255, 255, 255, 0.15);
+  --color-divider: rgba(255, 255, 255, 0.1);
+  
+  // Shadows
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
