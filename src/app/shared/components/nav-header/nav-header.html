@@ -1,0 +1,25 @@
+<header class="header">
+  <nav class="nav-container">
+    <a routerLink="/home" class="logo">
+      <span class="logo-text">Gilberto Ayala</span>
+    </a>
+
+    <ul class="nav-links">
+      @for (link of navLinks; track link.path) {
+        <li>
+          <a 
+            [routerLink]="link.path" 
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: link.path === '/home' }"
+            class="nav-link">
+            {{ link.label }}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <div class="header-actions">
+      <!-- <app-theme-toggle /> -->
+    </div>
+  </nav>
+</header>
