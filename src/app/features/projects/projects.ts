@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouteAnimationDirective } from '../../shared/directives/route-animation.directive';
 
 @Component({
   selector: 'app-projects',
-  imports: [],
+  imports: [RouteAnimationDirective],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
