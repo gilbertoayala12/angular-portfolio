@@ -8,17 +8,17 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadComponent: () => import('./features/home/home').then(m => m.Home),
+    loadComponent: () => import('./features/home/home').then(m => m.HomeComponent),
     title: 'Home - Gilberto Ayala'
   },
   {
     path: 'about',
-    loadComponent: () => import('./features/about/about').then(m => m.About),
+    loadComponent: () => import('./features/about/about').then(m => m.AboutComponent),
     title: 'About - Gilberto Ayala'
   },
   {
     path: 'projects',
-    loadComponent: () => import('./features/projects/projects').then(m => m.Projects),
+    loadComponent: () => import('./features/projects/projects').then(m => m.ProjectsComponent),
     title: 'Projects - Gilberto Ayala'
   },
   {
@@ -27,7 +27,7 @@ export const routes: Routes = [
   },
   {
     path: 'contact',
-    loadComponent: () => import('./features/contact/contact').then(m => m.Contact),
+    loadComponent: () => import('./features/contact/contact').then(m => m.ContactComponent),
     title: 'Contact - Gilberto Ayala'
   },
   {

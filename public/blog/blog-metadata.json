@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "title": "Hello World!",
+    "slug": "my-first-blog-post",
+    "date": "2026-01-07",
+    "description": "This is my first blog post.",
+    "tags": ["Life", "Random"],
+    "readTime": "1 min",
+    "fileName": "my-first-blog-post.md",
+    "coverImage": "",
+    "author": "Gilberto Ayala"
+  }
+]

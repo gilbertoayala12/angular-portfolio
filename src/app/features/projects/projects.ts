@@ -7,6 +7,6 @@ import { RouteAnimationDirective } from '../../shared/directives/route-animation
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
-export class Projects {
+export class ProjectsComponent {
 
 }

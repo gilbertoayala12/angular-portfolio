@@ -7,6 +7,6 @@ import { RouteAnimationDirective } from '../../shared/directives/route-animation
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })
-export class Contact {
+export class ContactComponent {
 
 }
