@@ -1,6 +1,111 @@
-<div class="container page-content" [appRouteAnimation]="'scale'">
-    <h1>Home Content</h1>
-    <div>
-        <app-blog-post></app-blog-post>
+<div class="blog-container" appRouteAnimation="scale">
+  <div class="container">
+    <!-- Header Section -->
+    <header class="blog-header">
+      <h1>Blog</h1>
+    </header>
+
+    <!-- Search and Filter Section -->
+    <div class="blog-filters">
+      <mat-form-field class="search-field" appearance="outline">
+        <mat-label>Search posts</mat-label>
+        <input 
+          matInput 
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="onSearch()"
+          placeholder="Search by title or description...">
+        <mat-icon matPrefix>search</mat-icon>
+        @if (searchQuery()) {
+          <button mat-icon-button matSuffix (click)="clearSearch()">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+
+      <!-- Tags Filter -->
+      @if (allTags().length > 0) {
+        <div class="tags-filter">
+          <span class="filter-label">Filter by tag:</span>
+          <mat-chip-set>
+            @for (tag of allTags(); track tag) {
+              <mat-chip 
+                [highlighted]="selectedTag() === tag"
+                (click)="filterByTag(tag)">
+                {{ tag }}
+              </mat-chip>
+            }
+          </mat-chip-set>
+        </div>
+      }
     </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+      <div class="loading-state">
+        <p>Loading posts...</p>
+      </div>
+    }
+
+    <!-- Posts Grid -->
+    @if (!isLoading() && filteredPosts().length > 0) {
+      <div class="posts-grid">
+        @for (post of filteredPosts(); track post.id) {
+          <article class="post-card">
+            @if (post.coverImage) {
+              <div class="post-image">
+                <img [src]="post.coverImage" [alt]="post.title">
+              </div>
+            }
+            
+            <div class="post-content">
+              <div class="post-meta">
+                <span class="post-date">{{ formatDate(post.date) }}</span>
+                <span class="post-read-time">
+                  <mat-icon>schedule</mat-icon>
+                  {{ post.readTime }}
+                </span>
+              </div>
+
+              <h2 class="post-title">
+                <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+              </h2>
+
+              <p class="post-description">{{ post.description }}</p>
+
+              <div class="post-footer">
+                <div class="post-tags">
+                  @for (tag of post.tags; track tag) {
+                    <span class="tag" (click)="filterByTag(tag)">{{ tag }}</span>
+                  }
+                </div>
+
+                <a 
+                  [routerLink]="['/blog', post.slug]" 
+                  class="read-more"
+                  mat-button 
+                  color="primary">
+                  Read More
+                  <mat-icon>arrow_forward</mat-icon>
+                </a>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    }
+
+    <!-- Empty State -->
+    @if (!isLoading() && filteredPosts().length === 0) {
+      <div class="empty-state">
+        <mat-icon>article</mat-icon>
+        <h3>No posts found</h3>
+        <p>Try adjusting your search or filter criteria</p>
+        @if (searchQuery() || selectedTag()) {
+          <button mat-raised-button color="primary" (click)="clearSearch()">
+            Clear Filters
+          </button>
+        }
+      </div>
+    }
+  </div>
 </div>

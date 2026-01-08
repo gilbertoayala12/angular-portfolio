@@ -1,3 +1,86 @@
-<div class="container page-content">
-<h2>Blog Post Content</h2>
+<div class="blog-post-container" appRouteAnimation="slideUp">
+  <div class="container">
+    <!-- Back Button -->
+    <button mat-button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Blog
+    </button>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+      <div class="loading-state">
+        <p>Loading post...</p>
+      </div>
+    }
+
+    <!-- Not Found State -->
+    @if (notFound() && !isLoading()) {
+      <div class="not-found">
+        <mat-icon>article</mat-icon>
+        <h2>Post Not Found</h2>
+        <p>The blog post you're looking for doesn't exist.</p>
+        <button mat-raised-button color="primary" (click)="goBack()">
+          Back to Blog
+        </button>
+      </div>
+    }
+
+    <!-- Post Content -->
+    @if (post() && !isLoading() && !notFound()) {
+      <article class="post-article">
+        <!-- Post Header -->
+        <header class="post-header">
+          @if (post()?.coverImage) {
+            <div class="post-cover">
+              <img [src]="post()!.coverImage" [alt]="post()!.title">
+            </div>
+          }
+
+          <div class="post-header-content">
+            <h1>{{ post()!.title }}</h1>
+            
+            <div class="post-meta">
+              <span class="post-date">
+                <mat-icon>calendar_today</mat-icon>
+                {{ formatDate(post()!.date) }}
+              </span>
+              <span class="post-read-time">
+                <mat-icon>schedule</mat-icon>
+                {{ post()!.readTime }} read
+              </span>
+              @if (post()?.author) {
+                <span class="post-author">
+                  <mat-icon>person</mat-icon>
+                  {{ post()!.author }}
+                </span>
+              }
+            </div>
+
+            @if (post()!.tags.length > 0) {
+              <div class="post-tags">
+                <mat-chip-set>
+                  @for (tag of post()!.tags; track tag) {
+                    <mat-chip>{{ tag }}</mat-chip>
+                  }
+                </mat-chip-set>
+              </div>
+            }
+          </div>
+        </header>
+
+        <!-- Markdown Content -->
+        <div class="post-body">
+          <markdown [data]="markdownContent()" class="markdown-content"></markdown>
+        </div>
+
+        <!-- Post Footer -->
+        <footer class="post-footer">
+          <button mat-raised-button color="primary" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+            Back to Blog
+          </button>
+        </footer>
+      </article>
+    }
+  </div>
 </div>
