@@ -1,0 +1,53 @@
+[
+  {
+    "id": "1",
+    "title": "Personal Portfolio Website",
+    "slug": "personal-portfolio",
+    "shortDescription": "A modern, performant portfolio website built with Angular 18, featuring a dynamic blog system and sleek animations",
+    "fullDescription": "A fully responsive portfolio website showcasing my work and technical writing. Built with Angular 18 using standalone components and the latest framework features including Signals for reactive state management. The site features a markdown-powered blog system, smooth page transitions using the Web Animations API, and a custom design system with dark/light mode support. Deployed on Vercel with automatic CI/CD from GitHub, the application achieves excellent Lighthouse scores and follows modern web development best practices.",
+    "thumbnail": "https://placehold.co/600x400/png?text=Portfolio",
+    "images": [
+      "https://placehold.co/600x400/png?text=Portfolio",
+      "https://placehold.co/600x400/png?text=Portfolio",
+      "https://placehold.co/600x400/png?text=Portfolio"
+    ],
+    "technologies": [
+      {
+        "name": "Angular",
+        "icon": "/icons/tech/angular.svg",
+        "color": "#DD0031"
+      },
+      {
+        "name": "TypeScript",
+        "icon": "/icons/tech/typescript.svg",
+        "color": "#3178C6"
+      },
+      {
+        "name": "SCSS",
+        "icon": "/icons/tech/sass.svg",
+        "color": "#CC6699"
+      },
+      {
+        "name": "vercel",
+        "icon": "/icons/tech/vercel.svg",
+        "color": "#757575"
+      }
+    ],
+    "tags": ["Web App", "Portfolio", "Frontend"],
+    "links": {
+      "demo": "https://your-portfolio.vercel.app",
+      "github": "https://github.com/yourusername/angular-portfolio"
+    },
+    "keyFeatures": [
+      "Dynamic markdown-based blog system with search and filtering",
+      "Smooth page transitions using native Web Animations API",
+      "Custom design system with accessible green color palette (WCAG AA compliant)",
+      "Dark/light theme toggle with user preference persistence",
+      "Fully responsive design optimized for all device sizes",
+      "Deployed on Vercel with automatic CI/CD pipeline"
+    ],
+    "role": "Solo Developer",
+    "date": "2025-01",
+    "featured": true
+  }
+]

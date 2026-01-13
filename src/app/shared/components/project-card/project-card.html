@@ -1,0 +1,51 @@
+<div class="project-card" (click)="onCardClick()">
+  <div class="project-image">
+    <img [src]="project().thumbnail" [alt]="project().title" />
+    <div class="project-overlay">
+      <span class="view-details">View Details</span>
+    </div>
+  </div>
+
+  <div class="project-content">
+    <h3 class="project-title">{{ project().title }}</h3>
+    <p class="project-description">{{ project().shortDescription }}</p>
+
+    <div class="project-technologies">
+      @for (tech of project().technologies.slice(0, 4); track tech.name) {
+        <div class="tech-icon" [matTooltip]="tech.name">
+          <img [src]="tech.icon" [alt]="tech.name" />
+        </div>
+      }
+      @if (project().technologies.length > 4) {
+        <span class="more-tech">+{{ project().technologies.length - 4 }}</span>
+      }
+    </div>
+
+    <div class="project-footer">
+      <div class="project-tags">
+        @for (tag of project().tags.slice(0, 2); track tag) {
+          <span class="tag">{{ tag }}</span>
+        }
+      </div>
+
+      <div class="project-links">
+        @if (project().links.demo) {
+          <button 
+            mat-icon-button 
+            [matTooltip]="'View Live Demo'"
+            (click)="onLinkClick($event, project().links.demo!)">
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+        }
+        @if (project().links.github) {
+          <button 
+            mat-icon-button 
+            [matTooltip]="'View Source Code'"
+            (click)="onLinkClick($event, project().links.github!)">
+            <mat-icon>code</mat-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
