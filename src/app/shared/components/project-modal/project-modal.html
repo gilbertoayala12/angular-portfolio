@@ -1,0 +1,132 @@
+@if (project()) {
+  <div 
+    class="modal-backdrop" 
+    [class.closing]="isClosing()"
+    (click)="onBackdropClick($event)">
+    <div 
+      class="modal-content"
+      [class.closing]="isClosing()">
+      <!-- Close Button -->
+      <button 
+        mat-icon-button 
+        class="close-button"
+        (click)="closeModal()"
+        matTooltip="Close (ESC)">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <!-- Image Gallery -->
+      <div class="modal-image-section">
+        <img [src]="currentImage" [alt]="project()!.title" />
+        
+        @if (hasMultipleImages) {
+          <div class="image-navigation">
+            <button 
+              mat-icon-button 
+              class="nav-button prev"
+              (click)="previousImage()">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <button 
+              mat-icon-button 
+              class="nav-button next"
+              (click)="nextImage()">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+
+          <div class="image-indicators">
+            @for (img of project()!.images; track img; let i = $index) {
+              <div 
+                class="indicator"
+                [class.active]="i === currentImageIndex"
+                (click)="currentImageIndex = i">
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Content Section -->
+      <div class="modal-body">
+        <!-- Header -->
+        <div class="modal-header">
+          <h2>{{ project()!.title }}</h2>
+          @if (project()!.role) {
+            <span class="role">{{ project()!.role }}</span>
+          }
+        </div>
+
+        <!-- Description -->
+        <div class="modal-section">
+          <p class="description">{{ project()!.fullDescription }}</p>
+        </div>
+
+        <!-- Key Features -->
+        @if (project()!.keyFeatures.length > 0) {
+          <div class="modal-section">
+            <h3 class="section-title">
+              <mat-icon>stars</mat-icon>
+              Key Features
+            </h3>
+            <ul class="features-list">
+              @for (feature of project()!.keyFeatures; track feature) {
+                <li>{{ feature }}</li>
+              }
+            </ul>
+          </div>
+        }
+
+        <!-- Tech Stack -->
+        <div class="modal-section">
+          <h3 class="section-title">
+            <mat-icon>build</mat-icon>
+            Tech Stack
+          </h3>
+          <div class="tech-stack">
+            @for (tech of project()!.technologies; track tech.name) {
+              <div class="tech-item">
+                <div class="tech-icon-large">
+                  <img [src]="tech.icon" [alt]="tech.name" />
+                </div>
+                <span class="tech-name">{{ tech.name }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Tags -->
+        @if (project()!.tags.length > 0) {
+          <div class="modal-section">
+            <div class="tags">
+              @for (tag of project()!.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Action Buttons -->
+        <div class="modal-actions">
+          @if (project()!.links.demo) {
+            <button 
+              mat-raised-button 
+              color="primary"
+              (click)="openLink(project()!.links.demo!)">
+              <mat-icon>open_in_new</mat-icon>
+              View Live Demo
+            </button>
+          }
+          @if (project()!.links.github) {
+            <button 
+              mat-stroked-button
+              (click)="openLink(project()!.links.github!)">
+              <mat-icon>code</mat-icon>
+              View Source Code
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}

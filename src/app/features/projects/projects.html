@@ -1,3 +1,80 @@
-<div class="container page-content" [appRouteAnimation]="'scale'">
-<h1>Projects Content</h1>
+<div class="projects-container" appRouteAnimation="scale">
+  <div class="container">
+    <!-- Header Section -->
+    <header class="projects-header">
+      <h1>My Work</h1>
+      <p class="projects-subtitle">
+        Showcasing solutions I've built with passion and precision
+      </p>
+    </header>
+
+    <!-- Filter Section -->
+    @if (allTechnologies().length > 0) {
+      <div class="projects-filters">
+        <span class="filter-label">Filter by technology:</span>
+        <mat-chip-set>
+          <mat-chip 
+            [highlighted]="selectedTech() === null"
+            (click)="clearFilter()">
+            All Projects ({{ projects().length }})
+          </mat-chip>
+          @for (tech of allTechnologies(); track tech) {
+            <mat-chip 
+              [highlighted]="selectedTech() === tech"
+              (click)="filterByTechnology(tech)">
+              {{ tech }}
+            </mat-chip>
+          }
+        </mat-chip-set>
+      </div>
+    }
+
+    <!-- Results Count -->
+    @if (selectedTech()) {
+      <div class="results-info">
+        <p>
+          Showing {{ filteredProjects().length }} of {{ projects().length }} projects
+          <button class="clear-filter" (click)="clearFilter()">
+            Clear filter
+          </button>
+        </p>
+      </div>
+    }
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+      <div class="loading-state">
+        <p>Loading projects...</p>
+      </div>
+    }
+
+    <!-- Projects Grid -->
+    @if (!isLoading() && filteredProjects().length > 0) {
+      <div class="projects-grid">
+        @for (project of filteredProjects(); track project.id) {
+          <app-project-card 
+            [project]="project"
+            (cardClicked)="openProjectModal($event)">
+          </app-project-card>
+        }
+      </div>
+    }
+
+    <!-- Empty State -->
+    @if (!isLoading() && filteredProjects().length === 0) {
+      <div class="empty-state">
+        <h3>No projects found</h3>
+        <p>No projects match the selected technology</p>
+        <button class="clear-filter-btn" (click)="clearFilter()">
+          View All Projects
+        </button>
+      </div>
+    }
+  </div>
 </div>
+
+<!-- Project Modal -->
+<app-project-modal 
+  [project]="selectedProject()"
+  (closed)="closeProjectModal()">
+</app-project-modal>
