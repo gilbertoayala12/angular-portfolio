@@ -15,6 +15,11 @@
   --color-accent-hover: #047857;
   --color-accent-rgb: 5, 150, 105; // For rgba usage
   
+  // Gradient colors
+  --gradient-start: #10B981;
+  --gradient-mid: #059669;
+  --gradient-end: #047857;
+  
   // Borders & Dividers
   --color-border: rgba(0, 0, 0, 0.1);
   --color-divider: rgba(0, 0, 0, 0.08);
@@ -58,6 +63,11 @@
   --color-accent: #10B981;
   --color-accent-hover: #34D399;
   --color-accent-rgb: 16, 185, 129;
+  
+  // Gradient colors (brighter for dark mode)
+  --gradient-start: #34D399;
+  --gradient-mid: #10B981;
+  --gradient-end: #059669;
   
   // Borders & Dividers
   --color-border: rgba(255, 255, 255, 0.15);
