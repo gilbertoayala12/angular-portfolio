@@ -47,7 +47,6 @@ src/
 │   │   └── services/            # Business logic services
 │   ├── features/                # Feature modules
 │   │   ├── home/                # Landing page
-│   │   ├── about/               # About me section
 │   │   ├── projects/            # Project showcase
 │   │   ├── blog/                # Blog system
 │   │   │   ├── blog-list/       # All blog posts
