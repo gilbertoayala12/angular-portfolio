@@ -10,7 +10,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class NavHeader {
   navLinks = [
     { path: '/home', label: 'Home' },
-    { path: '/about', label: 'About' },
     { path: '/projects', label: 'Projects' },
     { path: '/blog', label: 'Blog' },
     { path: '/contact', label: 'Contact' }

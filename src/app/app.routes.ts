@@ -12,11 +12,6 @@ export const routes: Routes = [
     title: 'Home - Gilberto Ayala'
   },
   {
-    path: 'about',
-    loadComponent: () => import('./features/about/about').then(m => m.AboutComponent),
-    title: 'About - Gilberto Ayala'
-  },
-  {
     path: 'projects',
     loadComponent: () => import('./features/projects/projects').then(m => m.ProjectsComponent),
     title: 'Projects - Gilberto Ayala'
