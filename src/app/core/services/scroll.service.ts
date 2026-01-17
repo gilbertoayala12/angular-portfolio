@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, Scroll } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { ViewportScroller } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScrollService {
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private viewportScroller: ViewportScroller
+  ) {
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(
+        filter(event => event instanceof NavigationEnd)
+      )
       .subscribe(() => {
-        // Smooth scroll to top
-        window.scrollTo({ 
-          top: 0, 
-          behavior: 'smooth' 
-        });
+        document.body.scrollTop = 0; // Works for Safari
+        document.documentElement.scrollTop = 0; // Works for Chrome, Firefox, IE and Opera
       });
   }
 }

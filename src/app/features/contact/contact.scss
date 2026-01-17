@@ -305,6 +305,13 @@
                 height: 2rem;
             }
 
+            @media (max-width: 768px) {
+                padding: var(--spacing-sm);
+                mat-icon {
+                    width: 5rem;
+                }
+            }
+
             .response-info {
                 display: flex;
                 flex-direction: column;
