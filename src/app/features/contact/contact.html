@@ -1,3 +1,101 @@
-<div class="container page-content" [appRouteAnimation]="'scale'">
-<h1>Contact Content</h1>
+<div class="contact-container" appRouteAnimation="scale">
+    <!-- Animated Background (similar to home) -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <h1 class="hero-title gradient-text">Let's Build Something Together</h1>
+            <p class="hero-subtitle">
+                I'm always open to discussing new projects, creative ideas, career opportunities, or collaborations.
+            </p>
+        </section>
+
+        <!-- Contact Methods Grid -->
+        <section class="contact-methods">
+            <div class="methods-grid">
+                @for (method of contactMethods; track method.title) {
+                <div class="contact-card glass-card">
+                    <div class="card-icon">
+                        <mat-icon>{{ method.icon }}</mat-icon>
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="card-title">{{ method.title }}</h3>
+                        <p class="card-description">{{ method.description }}</p>
+                        <span class="card-value">{{ method.value }}</span>
+                    </div>
+
+                    <div class="card-actions">
+                        @if (method.primaryAction.type === 'copy') {
+                        <button mat-raised-button color="primary" class="primary-action"
+                            (click)="handleAction(method, 'primary')">
+                            @if (copiedEmail()) {
+                            <div class="primary-action__button-label">
+                                <mat-icon>check</mat-icon>
+                                Copied!
+                            </div>
+                            
+                            } @else {
+                            <div class="primary-action__button-label">
+                                <mat-icon>content_copy</mat-icon>
+                                {{ method.primaryAction.label }}
+                            </div>
+                            }
+                        </button>
+                        } @else {
+                        <button mat-raised-button color="primary" class="primary-action"
+                            (click)="handleAction(method, 'primary')">
+                            <mat-icon>arrow_forward</mat-icon>
+                            {{ method.primaryAction.label }}
+                        </button>
+                        }
+
+                        @if (method.secondaryAction) {
+                        <button mat-stroked-button class="secondary-action" (click)="handleAction(method, 'secondary')">
+                            <mat-icon>send</mat-icon>
+                            {{ method.secondaryAction.label }}
+                        </button>
+                        }
+                    </div>
+                </div>
+                }
+            </div>
+        </section>
+
+        <!-- Availability Section -->
+        <section class="availability-section">
+            <div class="availability-card glass-card">
+                <div class="availability-header">
+                    <div class="status-badge">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Available for Opportunities</span>
+                    </div>
+                </div>
+
+                <div class="availability-content">
+                    <h3>Open to:</h3>
+                    <ul class="availability-list">
+                        @for (item of availability; track item) {
+                        <li>
+                            <mat-icon>check_circle</mat-icon>
+                            <span>{{ item }}</span>
+                        </li>
+                        }
+                    </ul>
+                </div>
+
+                <div class="response-time">
+                    <mat-icon>schedule</mat-icon>
+                    <div class="response-info">
+                        <strong>Quick Response Time</strong>
+                        <span>I typically respond within 24 hours on weekdays</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
