@@ -21,6 +21,7 @@
 
 .logo {
     text-decoration: none;
+    z-index: 1001;
 
     .logo-text {
         font-size: 1.5rem;
@@ -34,7 +35,7 @@
     }
 }
 
-.nav-links {
+.desktop-nav {
     position: relative;
     display: flex;
     list-style: none;
@@ -84,8 +85,100 @@
     }
 }
 
+.mobile-menu-button {
+    display: none;
+    color: var(--color-text-primary);
+    z-index: 1001;
+
+    @media (max-width: 768px) {
+        display: flex;
+        margin-left: auto;
+        margin-right: -40px;
+    }
+}
+
+.desktop-only {
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
 .header-actions {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+}
+
+// Mobile Navigation
+.mobile-nav {
+    position: fixed;
+    inset: 0;
+    top: 64px;
+    background-color: var(--color-border);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    animation: fadeIn 0.3s ease-out;
+
+    .mobile-nav-content {
+        background-color: var(--color-surface);
+        height: 380px;
+        max-width: 300px;
+        margin-left: auto;
+        padding: var(--spacing-md) var(--spacing-md);
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 30px 30px;
+        animation: slideInRight 0.3s ease-out;
+    }
+
+    .mobile-nav-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: var(--spacing-md);
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.125rem;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+
+            &:hover {
+                background-color: rgba(var(--color-accent-rgb), 0.1);
+                color: var(--color-text-primary);
+            }
+
+            &.active {
+                background-color: rgba(var(--color-accent-rgb), 0.15);
+                color: var(--color-accent);
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
 }
