@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { NavHeader } from "./shared/components/nav-header/nav-header";
 import { ScrollService } from './core/services/scroll.service';
+import { inject as injectVercel } from '@vercel/analytics';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +14,7 @@ import { ScrollService } from './core/services/scroll.service';
 export class App {
   protected readonly title = signal('Gilberto Ayala');
   private scrollService = inject(ScrollService);
+  constructor(){
+    injectVercel();
+  }
 }
