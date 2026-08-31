@@ -120,6 +120,8 @@
   top: 61px;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 999;
+  overflow-y: auto; // menu itself scrolls if content taller than viewport
+  -webkit-overflow-scrolling: touch;
   animation: fadeIn 0.2s ease-out;
 
   .mobile-nav-content {

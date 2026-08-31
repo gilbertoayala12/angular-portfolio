@@ -20,31 +20,39 @@
     </ul>
 
     <button
+      type="button"
       mat-icon-button
       class="mobile-menu-button"
       (click)="toggleMobileMenu()"
-      [attr.aria-label]="mobileMenuOpen() ? 'Close menu' : 'Open menu'">
-      <mat-icon>{{ mobileMenuOpen() ? 'close' : 'menu' }}</mat-icon>
+      [attr.aria-expanded]="mobileMenuOpen()"
+      aria-controls="mobile-nav-menu"
+      [attr.aria-label]="mobileMenuOpen() ? 'Close navigation menu' : 'Open navigation menu'">
+      <mat-icon aria-hidden="true">{{ mobileMenuOpen() ? 'close' : 'menu' }}</mat-icon>
     </button>
   </nav>
 
   @if (mobileMenuOpen()) {
     <div class="mobile-nav" (click)="closeMobileMenu()">
-      <div class="mobile-nav-content" (click)="$event.stopPropagation()">
-        <ul class="mobile-nav-links">
+      <nav
+        id="mobile-nav-menu"
+        class="mobile-nav-content"
+        aria-label="Mobile navigation"
+        (click)="$event.stopPropagation()">
+        <ul class="mobile-nav-links" role="list">
           @for (link of navLinks; track link.path) {
             <li>
               <a
                 [routerLink]="link.path"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: link.path === '/home' }"
-                class="mobile-nav-link">
+                class="mobile-nav-link"
+                (click)="closeMobileMenu()">
                 {{ link.label }}
               </a>
             </li>
           }
         </ul>
-      </div>
+      </nav>
     </div>
   }
 </header>

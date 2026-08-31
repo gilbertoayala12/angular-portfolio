@@ -19,4 +19,14 @@ export class App {
     injectVercel();
     injectSpeedInsights();
   }
+
+  skipToMain(event: Event): void {
+    event.preventDefault();
+    const main = document.getElementById('main-content');
+    if (main) {
+      main.setAttribute('tabindex', '-1');
+      main.focus();
+      main.removeAttribute('tabindex');
+    }
+  }
 }

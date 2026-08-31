@@ -44,7 +44,7 @@
 .hero-name {
   display: flex;
   flex-direction: column;
-  font-size: clamp(5rem, 14vw, 12rem);
+  font-size: clamp(2rem, 14vw, 12rem);
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -178,13 +178,29 @@ section {
       grid-column: 2;
     }
   }
+
+  .section-header {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .expertise-row {
+    grid-template-columns: 1.75rem 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .cta-headline {
+    font-size: clamp(2rem, 8vw, 6rem);
+  }
 }
 
 // ─── Featured Projects ────────────────────────────────────────────────────────
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: var(--spacing-lg);
   list-style: none;
   padding: 0;
@@ -359,6 +375,12 @@ section {
       flex-direction: row;
       gap: var(--spacing-md);
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .article-row {
+    gap: var(--spacing-sm);
   }
 }
 

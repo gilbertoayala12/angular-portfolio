@@ -34,9 +34,13 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html {
   height: 100%;
+  /* html stays as the document scroll container — do NOT set overflow-x here */
+}
+
+body {
+  min-height: 100%;
   background-color: var(--color-background);
   color: var(--color-text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -104,6 +108,10 @@ code, pre {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
+
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
 }
 
 // ─── Utility classes ─────────────────────────────────────────────────────────
