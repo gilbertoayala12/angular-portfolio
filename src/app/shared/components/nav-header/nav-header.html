@@ -1,15 +1,15 @@
-<header class="header">
+<header class="header" [class.scrolled]="scrolled()">
   <nav class="nav-container">
-    <a routerLink="/home" class="logo">
-      <span class="logo-text">Gilberto Ayala</span>
+    <a routerLink="/home" class="logo" aria-label="Gilberto Ayala — Home">
+      <span class="logo-text" aria-hidden="true">Gilberto Ayala</span>
     </a>
 
-    <ul class="nav-links desktop-nav">
+    <ul class="nav-links desktop-nav" role="list">
       @for (link of navLinks; track link.path) {
         <li>
-          <a 
+          <a
             #navLink
-            [routerLink]="link.path" 
+            [routerLink]="link.path"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: link.path === '/home' }"
             class="nav-link">
@@ -19,16 +19,13 @@
       }
     </ul>
 
-    <button 
-      mat-icon-button 
+    <button
+      mat-icon-button
       class="mobile-menu-button"
       (click)="toggleMobileMenu()"
       [attr.aria-label]="mobileMenuOpen() ? 'Close menu' : 'Open menu'">
       <mat-icon>{{ mobileMenuOpen() ? 'close' : 'menu' }}</mat-icon>
     </button>
-
-    <div class="header-actions desktop-only">
-    </div>
   </nav>
 
   @if (mobileMenuOpen()) {
@@ -37,8 +34,8 @@
         <ul class="mobile-nav-links">
           @for (link of navLinks; track link.path) {
             <li>
-              <a 
-                [routerLink]="link.path" 
+              <a
+                [routerLink]="link.path"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: link.path === '/home' }"
                 class="mobile-nav-link">

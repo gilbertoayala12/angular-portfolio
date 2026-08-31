@@ -1,9 +1,7 @@
-import { Component, ElementRef, viewChildren, AfterViewInit, signal } from '@angular/core';
+import { Component, ElementRef, viewChildren, signal, HostListener } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 
@@ -14,10 +12,8 @@ import { filter } from 'rxjs/operators';
     CommonModule,
     RouterLink,
     RouterLinkActive,
-    MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatSidenavModule,
   ],
   templateUrl: './nav-header.html',
   styleUrl: './nav-header.scss',
@@ -32,6 +28,7 @@ export class NavHeader {
 
   navLinkElements = viewChildren<ElementRef>('navLink');
   mobileMenuOpen = signal(false);
+  scrolled = signal(false);
 
   constructor(private router: Router) {
     this.router.events
@@ -41,6 +38,10 @@ export class NavHeader {
       });
   }
 
+  @HostListener('window:scroll')
+  onScroll() {
+    this.scrolled.set(window.scrollY > 20);
+  }
 
   toggleMobileMenu() {
     this.mobileMenuOpen.update(open => !open);

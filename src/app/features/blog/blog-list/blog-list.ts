@@ -1,13 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
 import { BlogPost } from '../../../core/models/blog-post.model';
 import { RouteAnimationDirective } from '../../../shared/directives/route-animation.directive';
 import { BlogPostService } from '../../../core/services/blog-post.service';
@@ -18,13 +11,6 @@ import { BlogPostService } from '../../../core/services/blog-post.service';
   imports: [
     CommonModule,
     RouterLink,
-    FormsModule,
-    MatCardModule,
-    MatChipsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
     RouteAnimationDirective
   ],
   templateUrl: './blog-list.html',
@@ -81,6 +67,12 @@ export class BlogListComponent implements OnInit {
         }
       });
     }
+  }
+
+  onSearchInput(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchQuery.set(value);
+    this.onSearch();
   }
 
   onSearch() {

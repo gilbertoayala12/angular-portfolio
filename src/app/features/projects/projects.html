@@ -1,80 +1,91 @@
 <div class="projects-container" appRouteAnimation="scale">
   <div class="container">
-    <!-- Header Section -->
+
     <header class="projects-header">
-      <h1>My Work</h1>
+      <p class="page-label">Selected Work</p>
+      <h1>My Projects</h1>
       <p class="projects-subtitle">
-        Showcasing solutions I've built with passion and precision
+        Solutions built with passion and precision
       </p>
     </header>
 
     <!-- Filter Section -->
     @if (allTechnologies().length > 0) {
-      <div class="projects-filters">
-        <span class="filter-label">Filter by technology:</span>
-        <mat-chip-set>
-          <mat-chip 
-            [highlighted]="selectedTech() === null"
+      <div class="projects-filters" role="group" aria-label="Filter projects by technology">
+        <span class="filter-label" id="filter-label">Filter</span>
+        <div class="chips-group" role="list">
+          <button
+            type="button"
+            class="chip"
+            role="listitem"
+            [class.active]="selectedTech() === null"
+            [attr.aria-pressed]="selectedTech() === null"
             (click)="clearFilter()">
-            All Projects ({{ projects().length }})
-          </mat-chip>
+            All ({{ projects().length }})
+          </button>
           @for (tech of allTechnologies(); track tech) {
-            <mat-chip 
-              [highlighted]="selectedTech() === tech"
+            <button
+              type="button"
+              class="chip"
+              role="listitem"
+              [class.active]="selectedTech() === tech"
+              [attr.aria-pressed]="selectedTech() === tech"
               (click)="filterByTechnology(tech)">
               {{ tech }}
-            </mat-chip>
+            </button>
           }
-        </mat-chip-set>
+        </div>
       </div>
     }
 
     <!-- Results Count -->
     @if (selectedTech()) {
-      <div class="results-info">
+      <div class="results-info" role="status" aria-live="polite">
         <p>
-          Showing {{ filteredProjects().length }} of {{ projects().length }} projects
-          <button class="clear-filter" (click)="clearFilter()">
-            Clear filter
-          </button>
+          Showing {{ filteredProjects().length }} of {{ projects().length }} projects for
+          <strong>{{ selectedTech() }}</strong>
+          <button type="button" class="clear-filter" (click)="clearFilter()">Clear ×</button>
         </p>
       </div>
     }
 
     <!-- Loading State -->
     @if (isLoading()) {
-      <div class="loading-state">
-        <p>Loading projects...</p>
+      <div class="loading-state" role="status" aria-live="polite">
+        <p>Loading projects…</p>
       </div>
     }
 
     <!-- Projects Grid -->
     @if (!isLoading() && filteredProjects().length > 0) {
-      <div class="projects-grid">
+      <ul class="projects-grid" role="list">
         @for (project of filteredProjects(); track project.id) {
-          <app-project-card 
-            [project]="project"
-            (cardClicked)="openProjectModal($event)">
-          </app-project-card>
+          <li>
+            <app-project-card
+              [project]="project"
+              (cardClicked)="openProjectModal($event)">
+            </app-project-card>
+          </li>
         }
-      </div>
+      </ul>
     }
 
     <!-- Empty State -->
     @if (!isLoading() && filteredProjects().length === 0) {
-      <div class="empty-state">
-        <h3>No projects found</h3>
+      <div class="empty-state" role="status">
+        <h2>No projects found</h2>
         <p>No projects match the selected technology</p>
-        <button class="clear-filter-btn" (click)="clearFilter()">
+        <button type="button" class="btn btn-accent" (click)="clearFilter()">
           View All Projects
         </button>
       </div>
     }
+
   </div>
 </div>
 
 <!-- Project Modal -->
-<app-project-modal 
+<app-project-modal
   [project]="selectedProject()"
   (closed)="closeProjectModal()">
 </app-project-modal>

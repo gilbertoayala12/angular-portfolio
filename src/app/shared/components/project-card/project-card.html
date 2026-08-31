@@ -1,51 +1,65 @@
-<div class="project-card" (click)="onCardClick()">
-  <div class="project-image">
-    <img [src]="project().thumbnail" [alt]="project().title" />
-    <div class="project-overlay">
-      <span class="view-details">View Details</span>
+<article class="project-card">
+  <button
+    type="button"
+    class="project-card-trigger"
+    (click)="onCardClick()"
+    [attr.aria-label]="'View details for ' + project().title">
+
+    <div class="project-image" aria-hidden="true">
+      <img [src]="project().thumbnail" [alt]="'Screenshot of ' + project().title" loading="lazy" />
+      <div class="project-overlay">
+        <span class="view-details">View Details</span>
+      </div>
     </div>
-  </div>
 
-  <div class="project-content">
-    <h3 class="project-title">{{ project().title }}</h3>
-    <p class="project-description">{{ project().shortDescription }}</p>
+    <div class="project-content">
+      <h3 class="project-title">{{ project().title }}</h3>
+      <p class="project-description">{{ project().shortDescription }}</p>
 
-    <div class="project-technologies">
-      @for (tech of project().technologies.slice(0, 4); track tech.name) {
-        <div class="tech-icon" [matTooltip]="tech.name">
-          <img [src]="tech.icon" [alt]="tech.name" />
+      <ul class="project-technologies" aria-label="Technologies used" role="list">
+        @for (tech of project().technologies.slice(0, 4); track tech.name) {
+          <li class="tech-icon" [matTooltip]="tech.name">
+            <img [src]="tech.icon" [alt]="tech.name" width="28" height="28" />
+          </li>
+        }
+        @if (project().technologies.length > 4) {
+          <li class="more-tech" aria-label="{{ project().technologies.length - 4 }} more technologies">
+            +{{ project().technologies.length - 4 }}
+          </li>
+        }
+      </ul>
+
+      <div class="project-footer">
+        <ul class="project-tags" role="list" aria-label="Project categories">
+          @for (tag of project().tags.slice(0, 2); track tag) {
+            <li class="tag">{{ tag }}</li>
+          }
+        </ul>
+
+        <div class="project-links" role="group" aria-label="External links for {{ project().title }}">
+          @if (project().links.demo) {
+            <button
+              type="button"
+              mat-icon-button
+              [matTooltip]="'View live demo for ' + project().title"
+              [attr.aria-label]="'View live demo for ' + project().title + ' (opens in new tab)'"
+              (click)="onLinkClick($event, project().links.demo!)">
+              <mat-icon aria-hidden="true">open_in_new</mat-icon>
+            </button>
+          }
+          @if (project().links.github) {
+            <button
+              type="button"
+              mat-icon-button
+              [matTooltip]="'View source code for ' + project().title"
+              [attr.aria-label]="'View source code for ' + project().title + ' (opens in new tab)'"
+              (click)="onLinkClick($event, project().links.github!)">
+              <mat-icon aria-hidden="true">code</mat-icon>
+            </button>
+          }
         </div>
-      }
-      @if (project().technologies.length > 4) {
-        <span class="more-tech">+{{ project().technologies.length - 4 }}</span>
-      }
-    </div>
-
-    <div class="project-footer">
-      <div class="project-tags">
-        @for (tag of project().tags.slice(0, 2); track tag) {
-          <span class="tag">{{ tag }}</span>
-        }
-      </div>
-
-      <div class="project-links">
-        @if (project().links.demo) {
-          <button 
-            mat-icon-button 
-            [matTooltip]="'View Live Demo'"
-            (click)="onLinkClick($event, project().links.demo!)">
-            <mat-icon>open_in_new</mat-icon>
-          </button>
-        }
-        @if (project().links.github) {
-          <button 
-            mat-icon-button 
-            [matTooltip]="'View Source Code'"
-            (click)="onLinkClick($event, project().links.github!)">
-            <mat-icon>code</mat-icon>
-          </button>
-        }
       </div>
     </div>
-  </div>
-</div>
+
+  </button>
+</article>

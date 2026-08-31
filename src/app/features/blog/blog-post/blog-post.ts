@@ -1,9 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { BlogPost } from '../../../core/models/blog-post.model';
 import { RouteAnimationDirective } from '../../../shared/directives/route-animation.directive';
@@ -14,10 +11,6 @@ import { BlogPostService } from '../../../core/services/blog-post.service';
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
-    MatButtonModule,
-    MatIconModule,
-    MatChipsModule,
     MarkdownComponent,
     RouteAnimationDirective
   ],

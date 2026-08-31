@@ -1,9 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { RouteAnimationDirective } from '../../shared/directives/route-animation.directive';
 import { ProjectsService } from '../../core/services/projects.service';
 import { Project } from '../../core/models/project.model';
@@ -17,9 +14,6 @@ import { map, Observable, of } from 'rxjs';
   imports: [
     CommonModule,
     RouterLink,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
     RouteAnimationDirective
   ],
   templateUrl: './home.html',

@@ -1,6 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatChipsModule } from '@angular/material/chips';
 import { ProjectsService } from '../../core/services/projects.service';
 import { Project } from '../../core/models/project.model';
 import { RouteAnimationDirective } from '../../shared/directives/route-animation.directive';
@@ -12,7 +11,6 @@ import { ProjectModalComponent } from '../../shared/components/project-modal/pro
   standalone: true,
   imports: [
     CommonModule,
-    MatChipsModule,
     ProjectCardComponent,
     ProjectModalComponent,
     RouteAnimationDirective

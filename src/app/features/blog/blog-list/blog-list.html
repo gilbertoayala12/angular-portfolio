@@ -1,111 +1,111 @@
 <div class="blog-container" appRouteAnimation="scale">
   <div class="container">
-    <!-- Header Section -->
+
     <header class="blog-header">
+      <p class="page-label">Writing</p>
       <h1>Blog</h1>
     </header>
 
-    <!-- Search and Filter Section -->
+    <!-- Search and Filter -->
     <div class="blog-filters">
-      <mat-form-field class="search-field" appearance="outline">
-        <mat-label>Search posts</mat-label>
-        <input 
-          matInput 
-          [(ngModel)]="searchQuery"
-          (ngModelChange)="onSearch()"
-          placeholder="Search by title or description...">
-        <mat-icon matPrefix>search</mat-icon>
+      <div class="search-wrapper" role="search">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <label for="blog-search" class="visually-hidden">Search posts</label>
+        <input
+          id="blog-search"
+          class="search-input"
+          type="search"
+          placeholder="Search posts…"
+          [value]="searchQuery()"
+          (input)="onSearchInput($event)"
+          autocomplete="off">
         @if (searchQuery()) {
-          <button mat-icon-button matSuffix (click)="clearSearch()">
-            <mat-icon>close</mat-icon>
+          <button
+            type="button"
+            class="search-clear"
+            aria-label="Clear search"
+            (click)="clearSearch()">
+            <span aria-hidden="true">×</span>
           </button>
         }
-      </mat-form-field>
+      </div>
 
       <!-- Tags Filter -->
       @if (allTags().length > 0) {
-        <div class="tags-filter">
-          <span class="filter-label">Filter by tag:</span>
-          <mat-chip-set>
+        <div class="tags-filter" role="group" aria-label="Filter by topic">
+          <span class="filter-label">Topics</span>
+          <div class="chips-group">
             @for (tag of allTags(); track tag) {
-              <mat-chip 
-                [highlighted]="selectedTag() === tag"
+              <button
+                type="button"
+                class="chip"
+                [class.active]="selectedTag() === tag"
+                [attr.aria-pressed]="selectedTag() === tag"
                 (click)="filterByTag(tag)">
                 {{ tag }}
-              </mat-chip>
+              </button>
             }
-          </mat-chip-set>
+          </div>
         </div>
       }
     </div>
 
+    <!-- Live region for results count -->
+    <p class="visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+      @if (!isLoading()) {
+        {{ filteredPosts().length }} post{{ filteredPosts().length !== 1 ? 's' : '' }} found
+      }
+    </p>
+
     <!-- Loading State -->
     @if (isLoading()) {
-      <div class="loading-state">
-        <p>Loading posts...</p>
+      <div class="loading-state" role="status">
+        <p>Loading posts…</p>
       </div>
     }
 
-    <!-- Posts Grid -->
+    <!-- Posts List -->
     @if (!isLoading() && filteredPosts().length > 0) {
-      <div class="posts-grid">
+      <ol class="posts-list" role="list">
         @for (post of filteredPosts(); track post.id) {
-          <article class="post-card">
-            @if (post.coverImage) {
-              <div class="post-image">
-                <img [src]="post.coverImage" [alt]="post.title">
-              </div>
-            }
-            
-            <div class="post-content">
-              <div class="post-meta">
-                <span class="post-date">{{ formatDate(post.date) }}</span>
-                <span class="post-read-time">
-                  <mat-icon>schedule</mat-icon>
-                  {{ post.readTime }}
-                </span>
-              </div>
-
-              <h2 class="post-title">
-                <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
-              </h2>
-
-              <p class="post-description">{{ post.description }}</p>
-
-              <div class="post-footer">
-                <div class="post-tags">
-                  @for (tag of post.tags; track tag) {
-                    <span class="tag" (click)="filterByTag(tag)">{{ tag }}</span>
-                  }
+          <li>
+            <a class="post-item" [routerLink]="['/blog', post.slug]" [attr.aria-label]="post.title + ', ' + formatDate(post.date) + ', ' + post.readTime + ' read'">
+              <hr class="section-rule" aria-hidden="true">
+              <div class="post-row">
+                <div class="post-meta" aria-hidden="true">
+                  <span class="post-date">{{ formatDate(post.date) }}</span>
+                  <span class="post-read-time">{{ post.readTime }}</span>
                 </div>
-
-                <a 
-                  [routerLink]="['/blog', post.slug]" 
-                  class="read-more"
-                  mat-button 
-                  color="primary">
-                  Read More
-                  <mat-icon>arrow_forward</mat-icon>
-                </a>
+                <div class="post-body">
+                  <h2 class="post-title">{{ post.title }}</h2>
+                  <p class="post-desc">{{ post.description }}</p>
+                  <ul class="post-tags" aria-label="Topics" role="list">
+                    @for (tag of post.tags; track tag) {
+                      <li>
+                        <span class="tag-label">{{ tag }}</span>
+                      </li>
+                    }
+                  </ul>
+                </div>
+                <span aria-hidden="true" class="post-arrow">→</span>
               </div>
-            </div>
-          </article>
+            </a>
+          </li>
         }
-      </div>
+      </ol>
+      <hr class="section-rule" aria-hidden="true">
     }
 
     <!-- Empty State -->
     @if (!isLoading() && filteredPosts().length === 0) {
-      <div class="empty-state">
-        <mat-icon>article</mat-icon>
-        <h3>No posts found</h3>
-        <p>Try adjusting your search or filter criteria</p>
+      <div class="empty-state" role="status">
+        <h2>No posts found</h2>
+        <p>Try adjusting your search or filter</p>
         @if (searchQuery() || selectedTag()) {
-          <button mat-raised-button color="primary" (click)="clearSearch()">
-            Clear Filters
-          </button>
+          <button type="button" class="btn btn-accent" (click)="clearSearch()">Clear Filters</button>
         }
       </div>
     }
+
   </div>
 </div>
